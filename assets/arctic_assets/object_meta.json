@@ -1,0 +1,58 @@
+{
+    "capsulemachine": {
+        "diameter": 0.25,
+        "diameter_top": 0.06569555401802063,
+        "diameter_bottom": 0.23253001272678375
+    },
+    "scissors": {
+        "diameter": 0.21,
+        "diameter_top": 0.191213458776474,
+        "diameter_bottom": 0.2047770917415619
+    },
+    "box": {
+        "diameter": 0.63,
+        "diameter_top": 0.41975975036621094,
+        "diameter_bottom": 0.4274512827396393
+    },
+    "ketchup": {
+        "diameter": 0.245,
+        "diameter_top": 0.052382390946149826,
+        "diameter_bottom": 0.21020612120628357
+    },
+    "laptop": {
+        "diameter": 0.52,
+        "diameter_top": 0.36841773986816406,
+        "diameter_bottom": 0.36891070008277893
+    },
+    "microwave": {
+        "diameter": 0.43,
+        "diameter_top": 0.1745288223028183,
+        "diameter_bottom": 0.3135516345500946
+    },
+    "mixer": {
+        "diameter": 0.32,
+        "diameter_top": 0.19561301171779633,
+        "diameter_bottom": 0.22531738877296448
+    },
+    "notebook": {
+        "diameter": 0.39,
+        "diameter_top": 0.2764810025691986,
+        "diameter_bottom": 0.28052133321762085
+    },
+    "phone": {
+        "diameter": 0.21,
+        "diameter_top": 0.11562851071357727,
+        "diameter_bottom": 0.11239393055438995
+    },
+    "espressomachine": {
+        "diameter": 0.33,
+        "diameter_top": 0.09508953988552094,
+        "diameter_bottom": 0.3091695010662079
+    },
+    "waffleiron": {
+        "diameter": 0.42,
+        "diameter_top": 0.20573610067367554,
+        "diameter_bottom": 0.1936246007680893
+    }
+}
+

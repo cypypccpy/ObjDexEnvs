@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!-- This file was generated from obj_file/4x4x4_real.stl. -->
+<robot name="ketchup">
+
+
+
+  <!-- <link name="bottom">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./object_vtemplates/ketchup/bottom_support.obj" scale="0.001 0.0007 0.0007"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./object_vtemplates/ketchup/bottom_support.obj" scale="0.001 0.0007 0.0007"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <density value="567.0"/>
+    </inertial>
+  </link> -->
+
+  <link name="bottom">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./object_vtemplates/ketchup/bottom.obj" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./object_vtemplates/ketchup/bottom.obj" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <density value="567.0"/>
+    </inertial>
+  </link>
+
+  <link name="top">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./object_vtemplates/ketchup/top.obj" scale="0.001 0.0007 0.0007"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="./object_vtemplates/ketchup/top.obj" scale="0.001 0.0007 0.0007"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <density value="567.0"/>
+    </inertial>
+  </link>
+
+
+  <joint name="joint1" type="revolute">
+    <parent link="bottom"/>
+    <child link="top"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="3.14"/>
+    <!-- <limit effort="50.0" lower="0.000" upper="0.001" velocity="3.14"/>
+    <dynamics damping="1.0" friction="1.0"/> -->
+  </joint>
+
+</robot>

@@ -1,0 +1,776 @@
+<?xml version="1.0" ?>
+<robot name="shadowhand">
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0" />
+  </material>
+  <material name="Green">
+    <color rgba="0.0 0.8 0.0 1.0" />
+  </material>
+  <material name="Grey">
+    <color rgba="0.2 0.2 0.2 1.0" />
+  </material>
+  <material name="LightGrey">
+    <color rgba="0.6 0.6 0.6 1.0" />
+  </material>
+  <material name="Red">
+    <color rgba="0.8 0.0 0.0 1.0" />
+  </material>
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0" />
+  </material>
+  <material name="black">
+    <color rgba="0.2 0.2 0.2 1"/>
+  </material>
+
+  <link name="world"/>
+  <joint name="robot_base_joint" type="fixed">
+    <origin rpy="0.0 0.0 3.14159265" xyz="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/base.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/base.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4.0"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.0061063308908" ixy="0.0" ixz="0.0" iyy="0.0061063308908" iyz="0.0" izz="0.01125"/>
+    </inertial>
+  </link>
+  <joint name="shoulder_pan_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="shoulder_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.181"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="330.0" lower="-6.2831853" upper="6.2831853" velocity="3.14"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="shoulder_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/shoulder.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/shoulder.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="7.778"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+      <inertia ixx="0.0314743125769" ixy="0.0" ixz="0.0" iyy="0.0314743125769" iyz="0.0" izz="0.021875625"/>
+    </inertial>
+  </link>
+  <joint name="shoulder_lift_joint" type="revolute">
+    <parent link="shoulder_link"/>
+    <child link="upper_arm_link"/>
+    <origin rpy="0.0 1.570796325 0.0" xyz="0.0 0.176 0.0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="330.0" lower="-6.2831853" upper="6.2831853" velocity="3.14"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="upper_arm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/upperarm.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/upperarm.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="12.93"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.3065"/>
+      <inertia ixx="0.42307374077" ixy="0.0" ixz="0.0" iyy="0.42307374077" iyz="0.0" izz="0.036365625"/>
+    </inertial>
+  </link>
+  <joint name="elbow_joint" type="revolute">
+    <parent link="upper_arm_link"/>
+    <child link="forearm_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 -0.137 0.613"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="150.0" lower="-6.2831853" upper="6.2831853" velocity="3.14"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="forearm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/forearm.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/forearm.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.87"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.2855"/>
+      <inertia ixx="0.110590365764" ixy="0.0" ixz="0.0" iyy="0.110590365764" iyz="0.0" izz="0.010884375"/>
+    </inertial>
+  </link>
+  <joint name="wrist_1_joint" type="revolute">
+    <parent link="forearm_link"/>
+    <child link="wrist_1_link"/>
+    <origin rpy="0.0 1.570796325 0.0" xyz="0.0 0.0 0.571"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="54.0" lower="-6.2831853" upper="6.2831853" velocity="6.28"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="wrist_1_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/wrist1.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/wrist1.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.96"/>
+      <origin rpy="0 0 0" xyz="0.0 0.135 0.0"/>
+      <inertia ixx="0.0051082479567" ixy="0.0" ixz="0.0" iyy="0.0051082479567" iyz="0.0" izz="0.0055125"/>
+    </inertial>
+  </link>
+  <joint name="wrist_2_joint" type="revolute">
+    <parent link="wrist_1_link"/>
+    <child link="wrist_2_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.135 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.2831853" upper="6.2831853" velocity="6.28"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="wrist_2_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/wrist2.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/wrist2.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.96"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.12"/>
+      <inertia ixx="0.0051082479567" ixy="0.0" ixz="0.0" iyy="0.0051082479567" iyz="0.0" izz="0.0055125"/>
+    </inertial>
+  </link>
+  <joint name="wrist_3_joint" type="revolute">
+    <parent link="wrist_2_link"/>
+    <child link="wrist_3_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.12"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="54.0" lower="-6.2831853" upper="6.2831853" velocity="6.28"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="wrist_3_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/visual/wrist3.dae"/>
+      </geometry>
+      <origin rpy="1.571 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/ur10e/collision/wrist3.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.202"/>
+      <origin rpy="1.570796325 0 0" xyz="0.0 0.092 0.0"/>
+      <inertia ixx="0.000144345775595" ixy="0.0" ixz="0.0" iyy="0.000144345775595" iyz="0.0" izz="0.000204525"/>
+    </inertial>
+  </link>
+<joint name="ee_fixed_joint" type="fixed">
+    <origin rpy="1.571 0 3.1415" xyz="0.0 0.15 0.0"/>
+    <parent link="wrist_3_link"/>
+    <child link="left_hand_base_link"/>
+  </joint>
+
+
+  <link name="left_hand_base_link">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -0.032"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/base10.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.009"/>
+      <geometry>
+        <cylinder radius="0.045" length="0.045"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- LENGTH NOT FOUND IN DATASHEET! GUESSED!!! -->
+  <link name="left_hand_e1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.01313 0"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/h10_left.obj" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0.01313 0.013"/>
+      <geometry>
+        <box size="0.05 0.05 0.026"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.00573 0.0035 0.05747"/>
+      <geometry>
+        <box size="0.0584 0.038 0.0641"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.01 0.0035 0.096"/>
+      <geometry>
+        <box size="0.042 0.038 0.015"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- LENGTH NOT FOUND IN DATASHEET! GUESSED!!! -->
+  <link name="left_hand_e2">
+    <visual>
+      <origin xyz="0.0007 0 -0.01002"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/h11_left.obj" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.016 0 0.02"/>
+      <geometry>
+        <box size="0.0246 0.035 0.0564"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.0032 -0.0083 0.048"/>
+      <geometry>
+        <box size="0.012 0.018 0.021"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- THUMB LINKS -->
+  <link name="left_hand_z">
+    <visual>
+      <origin xyz="0 0 0.02442"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/d10_left.obj" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.02842"/>
+      <geometry>
+        <box size="0.024 0.0188 0.008"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.0125 0.0 0.04292"/>
+      <geometry>
+        <box size="0.006 0.024 0.033"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0125 0.0 0.04292"/>
+      <geometry>
+        <box size="0.006 0.024 0.033"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_a">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/d11_left.obj" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/d11_left.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_b">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/d12_left.obj" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/d12_left.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_c">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.007 0.000 0.000"/>
+      <mass value="0.02"/>
+      <inertia ixx="1e-5" ixy="0.0" ixz="0.0" iyy="2e-5" iyz="0.0" izz="2e-5"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/d13_left.obj" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/d13_left.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- INDEX FINGER LINKS -->
+  <link name="left_hand_virtual_l">
+    <visual>
+      <origin xyz="0 0 0.01321"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f10_f20.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.00121"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_l">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f11.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f11.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_p">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.01 0.000 0.000"/>
+      <mass value="0.024"/>
+      <inertia ixx="9e-7" ixy="0.0" ixz="0.0" iyy="3e-6" iyz="0.0" izz="2e-6"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f12.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f12.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_t">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.007 0.000 0.000"/>
+      <mass value="0.02"/>
+      <inertia ixx="1e-5" ixy="0.0" ixz="0.0" iyy="2e-5" iyz="0.0" izz="2e-5"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/finger_tip.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/finger_tip.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- MIDDLE FINGER LINKS -->
+  <link name="left_hand_virtual_k">
+    <visual>
+      <origin xyz="0 0 0.01321"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f10_f20.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.00321"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_k">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f21.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f21.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_o">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f22_f32.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f22_f32.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_s">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.007 0.000 0.000"/>
+      <mass value="0.02"/>
+      <inertia ixx="1e-5" ixy="0.0" ixz="0.0" iyy="2e-5" iyz="0.0" izz="2e-5"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/finger_tip.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/finger_tip.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- RING FINGER LINKS -->
+  <link name="left_hand_virtual_j">
+    <visual>
+      <origin xyz="0 0 -0.01321"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f30_f40.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.00321"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_j">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f31.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f31.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_n">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f22_f32.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f22_f32.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_r">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.007 0.000 0.000"/>
+      <mass value="0.02"/>
+      <inertia ixx="1e-5" ixy="0.0" ixz="0.0" iyy="2e-5" iyz="0.0" izz="2e-5"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/finger_tip.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/finger_tip.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- LITTLE FINGER LINKS -->
+  <link name="left_hand_virtual_i">
+    <visual>
+      <origin xyz="0 0 -0.01321"/>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f30_f40.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.00321"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_i">
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f41.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f41.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_m">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.007 0.000 0.000"/>
+      <mass value="0.02"/>
+      <inertia ixx="8e-7" ixy="0.0" ixz="0.0" iyy="2e-6" iyz="0.0" izz="2e-6"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/f42.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/f42.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hand_q">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.007 0.000 0.000"/>
+      <mass value="0.02"/>
+      <inertia ixx="1e-5" ixy="0.0" ixz="0.0" iyy="2e-5" iyz="0.0" izz="2e-5"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/visual/finger_tip.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="schunk_hand/meshes/collision/finger_tip.obj"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_hand_Thumb_Flexion" type="revolute">
+    <parent link="left_hand_z"/>
+    <child link="left_hand_a"/>
+    <limit effort="1000.0" lower="-0.9704" upper="0.0"  velocity="1"/>
+    <origin rpy="-1.57079 -0.6004 -1.57079" xyz="0 0 0.04596"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <!-- BASE_LINE JOINTS -->
+  <joint name="left_hand_Thumb_Opposition" type="revolute">
+    <parent link="left_hand_e1"/>
+    <child link="left_hand_z"/>
+    <limit effort="1000.0" lower="0.0" upper="0.9879" velocity="1"/>
+    <origin rpy="0 0.2618 1.571" xyz="0.0169 0.02626 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="left_hand_f4" type="fixed">
+    <parent link="left_hand_base_link"/>
+    <child link="left_hand_e1"/>
+    <origin rpy="0 0 0" xyz="0 -0.01313 0"/>
+  </joint>
+  <joint name="left_hand_j5" type="revolute">
+    <parent link="left_hand_e1"/>
+    <child link="left_hand_e2"/>
+    <limit effort="1000.0" upper="0.0" lower="-0.98786" velocity="1"/>
+    <origin rpy="0 0 0" xyz="-0.0184 0.006 0.0375"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Thumb_Opposition" multiplier="1" offset="0"/>
+  </joint>
+  <!-- THUMB JOINTS -->
+  <joint name="left_hand_j3" type="revolute">
+    <parent link="left_hand_a"/>
+    <child link="left_hand_b"/>
+    <limit effort="1000.0" upper="0.0" lower="-0.98506" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.0485 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Thumb_Flexion" multiplier="1.01511" offset="0"/>
+  </joint>
+  <joint name="left_hand_j4" type="revolute">
+    <parent link="left_hand_b"/>
+    <child link="left_hand_c"/>
+    <limit effort="1000.0" lower="-1.406" upper="0" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.030 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Thumb_Flexion" multiplier="1.44889" offset="0"/>
+  </joint>
+  <!-- INDEX FINGER JOINTS -->
+  <joint name="left_hand_Index_Finger_Distal" type="revolute">
+    <parent link="left_hand_l"/>
+    <child link="left_hand_p"/>
+    <limit effort="1000.0" lower="0" upper="1.334" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.04804 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="left_hand_Index_Finger_Proximal" type="revolute">
+    <parent link="left_hand_virtual_l"/>
+    <child link="left_hand_l"/>
+    <limit effort="1000.0" lower="0.0" upper="0.79849" velocity="1"/>
+    <origin rpy="-1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <!-- JOINT Finger_Spread in BASE_LINE section for better UX -->
+  <joint name="left_hand_j14" type="revolute">
+    <parent link="left_hand_p"/>
+    <child link="left_hand_t"/>
+    <limit effort="1000.0" lower="0" upper="1.394" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.026 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Index_Finger_Distal" multiplier="1.0450" offset="0"/>
+  </joint>
+  <!-- MIDDLE FINGER JOINTS -->
+  <joint name="left_hand_Middle_Finger_Proximal" type="revolute">
+    <parent link="left_hand_virtual_k"/>
+    <child link="left_hand_k"/>
+    <limit effort="1000.0" lower="0.0" upper="0.79849" velocity="1"/>
+    <origin rpy="-1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="left_hand_Middle_Finger_Distal" type="revolute">
+    <parent link="left_hand_k"/>
+    <child link="left_hand_o"/>
+    <limit effort="1000.0" lower="0" upper="1.334" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.05004 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="left_hand_j15" type="revolute">
+    <parent link="left_hand_o"/>
+    <child link="left_hand_s"/>
+    <limit effort="1000.0" lower="0" upper="1.334" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.032 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Middle_Finger_Distal" multiplier="1.0454" offset="0"/>
+  </joint>
+  <!-- RING FINGER JOINTS -->
+  <joint name="left_hand_Ring_Finger" type="revolute">
+    <parent link="left_hand_virtual_j"/>
+    <child link="left_hand_j"/>
+    <limit effort="1000.0" lower="0.0" upper="0.98175" velocity="1"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="left_hand_j12" type="revolute">
+    <parent link="left_hand_j"/>
+    <child link="left_hand_n"/>
+    <limit effort="1000.0" lower="0" upper="1.334" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.05004 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Ring_Finger" multiplier="1.3588" offset="0"/>
+  </joint>
+  <joint name="left_hand_j16" type="revolute">
+    <parent link="left_hand_n"/>
+    <child link="left_hand_r"/>
+    <limit effort="1000.0" lower="0" upper="1.395" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.032 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Ring_Finger" multiplier="1.42093" offset="0"/>
+  </joint>
+  <!-- PINKY JOINTS -->
+  <joint name="left_hand_Pinky" type="revolute">
+    <parent link="left_hand_virtual_i"/>
+    <child link="left_hand_i"/>
+    <limit effort="1000.0" lower="0.0" upper="0.98175" velocity="1"/>
+    <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <joint name="left_hand_j13" type="revolute">
+    <parent link="left_hand_i"/>
+    <child link="left_hand_m"/>
+    <limit effort="1000.0" lower="0" upper="1.334" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.04454 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Pinky" multiplier="1.35880" offset="0"/>
+  </joint>
+  <joint name="left_hand_j17" type="revolute">
+    <parent link="left_hand_m"/>
+    <child link="left_hand_q"/>
+    <limit effort="1000.0" lower="0" upper="1.3971" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.022 0 0"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Pinky" multiplier="1.42307" offset="0"/>
+  </joint>
+  <joint name="left_hand_index_spread" type="revolute">
+    <parent link="left_hand_e1"/>
+    <child link="left_hand_virtual_l"/>
+    <limit effort="1000.0" upper="0.0" lower="-0.28833" velocity="1"/>
+    <origin rpy="0 -1.5707 1.5707" xyz="0.025 0 0.110"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Finger_Spread" multiplier="0.5" offset="0"/>
+  </joint>
+  <joint name="left_hand_middle_spread_dummy" type="fixed">
+    <parent link="left_hand_e1"/>
+    <child link="left_hand_virtual_k"/>
+    <origin rpy="0 -1.5707 1.5707" xyz="0 0 0.110"/>
+  </joint>
+  <joint name="left_hand_ring_spread" type="revolute">
+    <parent link="left_hand_e2"/>
+    <child link="left_hand_virtual_j"/>
+    <limit effort="1000.0" upper="0.0" lower="-0.28833" velocity="1"/>
+    <origin rpy="-1.5707 -1.5707 0" xyz="-0.003855 -0.006 0.0655"/>
+    <axis xyz="0 0 1"/>
+    <mimic joint="left_hand_Finger_Spread" multiplier="0.5" offset="0"/>
+  </joint>
+  <joint name="left_hand_Finger_Spread" type="revolute">
+    <parent link="left_hand_e2"/>
+    <child link="left_hand_virtual_i"/>
+    <limit effort="1000.0" upper="0.0" lower="-0.5829" velocity="1"/>
+    <origin rpy="-1.5707 -1.5707 0" xyz="-0.025355 -0.006 0.056"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="thtip"/>
+  <link name="fftip"/>
+  <link name="mftip"/>
+  <link name="rftip"/>
+  <link name="lftip"/>
+  <joint name="thtip_joint" type="fixed">
+    <parent link="left_hand_c"/>
+    <child link="thtip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.0275 0.000 0.000"/>
+  </joint>
+  <joint name="fftip_joint" type="fixed">
+    <parent link="left_hand_t"/>
+    <child link="fftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.014 0.000 0.000"/>
+  </joint>
+  <joint name="mftip_joint" type="fixed">
+    <parent link="left_hand_s"/>
+    <child link="mftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.014 0.000 0.000"/>
+  </joint>
+  <joint name="rftip_joint" type="fixed">
+    <parent link="left_hand_r"/>
+    <child link="rftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.014 0.000 0.000"/>
+  </joint>
+  <joint name="lftip_joint" type="fixed">
+    <parent link="left_hand_q"/>
+    <child link="lftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.014 0.000 0.000"/>
+  </joint>
+</robot>

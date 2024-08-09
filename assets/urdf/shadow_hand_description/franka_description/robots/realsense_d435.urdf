@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!-- This file was generated from obj_file/realsense.stl. -->
+<robot name="realsense.urdf">
+
+
+  <link name="realsense.stl">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/visual/d435.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="../meshes/visual/d435.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <density value="567.0"/>
+    </inertial>
+  </link>
+
+</robot>
