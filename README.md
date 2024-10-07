@@ -1,13 +1,88 @@
-# Bi-DexHands: Bimanual Dexterous Manipulation via Reinforcement Learning
+# Object-Centric Dexterous Manipulation from Human Motion Data
 
-ShadowHandFreeWithPhysics:
+<img src="assets/image_folder/teaser.gif" border=0 width=80% center>
 
-```python
-python train_rlgames.py --task ShadowHandFreeWithPhysics --algo arctic_grasp --seed 22 --num_envs=1 --play --enable_camera
+## Table of Content
+- [Overview](#overview)
+- [Installation](#installation)
+- [Quick demo](#quick-demo)
+- [Training](#training)
+- [Evaluation](#evaluation)
+- [Acknowledgement](#acknowledgement)
+- [Citations](#citations)
+- [License](#license)
+
+## Overview
+
+This repository is the implementation code of the paper "Object-Centric Dexterous Manipulation from Human Motion Data"([Paper](https://arxiv.org/abs/2309.00987), [Website](https://cypypccpy.github.io/obj-dex.github.io/)) by Yuanpei Chen, Chen Wang, Yaodong Yang and C. Karen Liu. In this repo, we provide our full implementation code of quick demo, training, evaluation, and real-world system.
+
+## Installation
+* python 3.8
+```	
+conda create -n objdex python=3.8
+conda activate objdex
 ```
 
-ShadowHandFreeVisualization:
-
-```python
-python train_rlgames.py --task ShadowHandFreeVisualization --algo arctic_grasp --seed 22 --num_envs=1 --play --hand=mano --traj_index=01_01
+* IsaacGym (tested with `Preview Release 3/4` and `Preview Release 4/4`). Follow the [instruction](https://developer.nvidia.com/isaac-gym) to download the package.
+```	
+tar -xvf IsaacGym_Preview_4_Package.tar.gz
+cd isaacgym/python
+pip install -e .
+cd examples
+(test installation) python examples/joint_monkey.py
 ```
+* ObjDex
+```	
+git clone https://github.com/cypypccpy/ObjDexEnvs.git
+cd ObjDex
+pip install -r requirements.txt
+pip install -e .
+```
+
+* ARCTIC datasets
+Follow the [ARCTIC github repo](https://developer.nvidia.com/isaac-gym) to download the datasets and process them.
+
+## Training
+If you want to train a policy for the Box-Use-s01-01 clip from the arctic datasets, run this line in `dexteroushandenvs` folder:
+
+```	
+python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box
+```
+
+The trained model will be saved to `runs` folder.
+
+We support that retarget human data from the ARCTIC dataset by specifying the object, the clip id, and the type of the robot hand. Here are some examples and corresponding commands (The difficulty of each clip is different, so the number of training epochs required is also different. You can modify this parameter in `dexteroushandenvs/cfg/arctic/arctic.yaml`):
+<!-- 
+| Human Data Clip | Command | Demo     |
+|  :----:  | :----:  | :----:  |
+| Box-Use-s01-01 |  | <img src="assets/image_folder/0v2.gif" width="250"/>    |
+| Box-Use-s01-01 |These environments again have two hands, however now they have some additional degrees of freedom that allows them to translate/rotate their centre of masses within some constrained region. | <img src="assets/image_folder/hand_catch_underarmv2.gif" align="middle" width="250"/>    |
+| Box-Use-s01-01 | This environment is made up of half ShadowHandCatchUnderarm and half ShadowHandCatchOverarm, the object needs to be thrown from the vertical hand to the palm-up hand | <img src="assets/image_folder/2v2.gif" align="middle" width="250"/>    |
+| Box-Use-s01-01 | This environment is similar to ShadowHandCatchUnderarm, the difference is that the two hands are changed from relative to side-by-side posture. | <img src="assets/image_folder/1v2.gif" align="middle" width="250"/>    |
+| Box-Use-s01-01 | These environments involve coordination between the two hands so as to throw the two objects between hands (i.e. swapping them). | <img src="assets/image_folder/two_catchv2.gif" align="middle" width="250"/>    |
+| Box-Use-s01-01 | This environment requires grasping the pot handle with two hands and lifting the pot to the designated position  | <img src="assets/image_folder/3v2.gif" align="middle" width="250"/>    | -->
+
+## Evaluation
+To load a trained model and only perform inference (no training), pass `--play` as an argument, and pass `--checkpoint` to specify the trained models which you want to load. Here is an example:
+
+```bash
+python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=1 --hand=shadow --traj_index=01_01 --object=box --play --checkpoint=[path_to_checkpoint]
+```
+
+## Acknowledgement
+
+We thank the list of contributors from the [Bi-DexHands](https://github.com/PKU-MARL/DexterousHands).
+
+## Citations
+Please cite [Sequential Dexterity](https://sequential-dexterity.github.io) if you use this repository in your publications:
+```
+@article{chen2023sequential,
+  title={Sequential Dexterity: Chaining Dexterous Policies for Long-Horizon Manipulation},
+  author={Chen, Yuanpei and Wang, Chen and Fei-Fei, Li and Liu, C Karen},
+  journal={arXiv preprint arXiv:2309.00987},
+  year={2023}
+}
+```
+
+## License
+Licensed under the [MIT License](LICENSE)

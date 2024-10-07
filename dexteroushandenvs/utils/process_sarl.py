@@ -298,7 +298,6 @@ def process_ppogpt(args, env, cfg_train, logdir):
               asymmetric=learn_cfg["asymmetric"]
               )
 
-    # ppo.test("/home/jmji/DexterousHandEnvs/dexteroushandenvs/logs/allegro_hand_catch_underarm/ppo/ppo_seed-1/model_6000.pt")
     if is_testing and args.model_dir != "":
         print("Loading model from {}".format(chkpt_path))
         ppo.test(chkpt_path)

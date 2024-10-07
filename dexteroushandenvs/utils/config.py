@@ -70,19 +70,11 @@ def set_seed(seed, torch_deterministic=False):
 def retrieve_cfg(args, use_rlg_config=False):
     # TODO: add config files of sac, td3
     # 这里的设计有点不合理 可以修正
-    if args.task == "ShadowHandFreeVisualization":
+    if args.task == "DexterousHandArctic":
         return (
-            os.path.join(args.logdir, "shadow_hand_free_visualization/{}/{}".format(args.algo, args.algo)),
+            os.path.join(args.logdir, "dexterous_hand_arctic/{}/{}".format(args.algo, args.algo)),
             "cfg/{}/config.yaml".format(args.algo),
-            "cfg/shadow_hand_free_visualization.yaml",
-        )
-    elif args.task == "ShadowHandFreeWithPhysics":
-        return (
-            os.path.join(
-                args.logdir, "shadow_hand_free_with_physics{}/{}".format(args.algo, args.algo)
-            ),
-            "cfg/{}/config.yaml".format(args.algo),
-            "cfg/shadow_hand_free_with_physics.yaml",
+            "cfg/dexterous_hand_arctic.yaml",
         )
 
     else:
@@ -546,8 +538,5 @@ def get_args(benchmark=False, use_rlg_config=False):
 
     if args.cfg_env == "Base":
         args.cfg_env = cfg_env
-
-    # if args.algo not in ["maddpg", "happo", "mappo", "hatrpo","ippo","ppo","sac","td3","ddpg","trpo"]:
-    #     warn_algorithm_name()
-
+        
     return args

@@ -97,11 +97,6 @@ class BaseTask():
         self.virtual_display = None
         SCREEN_CAPTURE_RESOLUTION = (1027, 768)
 
-        # if cfg["record_video"]:
-        #     from pyvirtualdisplay.smartdisplay import SmartDisplay
-        #     self.virtual_display = SmartDisplay(size=SCREEN_CAPTURE_RESOLUTION)
-        #     self.virtual_display.start()
-
         # if running with a viewer, set up keyboard shortcuts and camera
         if self.headless == False:
             # subscribe to keyboard shortcuts
@@ -124,24 +119,6 @@ class BaseTask():
             self.gym.viewer_camera_look_at(
                 self.viewer, None, cam_pos, cam_target)
 
-        self.record_sim_scene = False
-        if self.record_sim_scene:
-            self.sim_scene_recorder = {"dof_state": [], "root_state_tensor": []}
-
-            import h5py
-
-            # hdf5_path = os.path.join("demonstration/", "red_sim_scene.hdf5")
-            # self.hdf5 = h5py.File(hdf5_path, "w")
-
-            # # store some metadata in the attributes of one group
-            # grp = self.hdf5.create_group("data")
-            # self.root_state_tensor_grp = grp.create_group("root_state_tensor")
-            # self.dof_state_grp = grp.create_group("dof_state")          
-
-            # self.f_actor_root_state_tensor = self.gym.acquire_actor_root_state_tensor(self.sim)
-            # self.f_dof_state_tensor = self.gym.acquire_dof_state_tensor(self.sim)
-        # import pyautogui
-        # pyautogui.press("v")
     # set gravity based on up axis and return axis index
     def set_sim_params_up_axis(self, sim_params, axis):
         if axis == 'z':
@@ -183,10 +160,6 @@ class BaseTask():
         if self.dr_randomizations.get('observations', None):
             self.obs_buf = self.dr_randomizations['observations']['noise_lambda'](self.obs_buf)
 
-        # require some return for video recorder
-        # if self.cfg["record_video"]:
-        #     return self.obs_buf.to(self.device), self.rew_buf.to(self.device), self.reset_buf.to(self.device), self.extras
-
     def get_states(self):
         return self.states_buf
 
@@ -199,11 +172,7 @@ class BaseTask():
             # check for keyboard events
             for evt in self.gym.query_viewer_action_events(self.viewer):
                 if evt.action == "QUIT" and evt.value > 0:
-                    if self.record_sim_scene:
-                        import pickle
-                        with open("demonstration/shoe_sim_scene.pkl", "wb") as f:
-                            pickle.dump(self.sim_scene_recorder, f)
-                        sys.exit()          
+                    sys.exit()          
 
                 elif evt.action == "toggle_viewer_sync" and evt.value > 0:
                     self.enable_viewer_sync = not self.enable_viewer_sync
@@ -229,14 +198,6 @@ class BaseTask():
                 img = self.virtual_display.grab()
                 print(np.array(img).shape)
                 return np.array(img)
-
-        if self.record_sim_scene:
-            self.gym.refresh_actor_root_state_tensor(self.sim)
-            self.gym.refresh_dof_state_tensor(self.sim)
-            self.sim_scene_recorder["dof_state"].append(gymtorch.wrap_tensor(self.f_dof_state_tensor).clone())
-            self.sim_scene_recorder["root_state_tensor"].append(gymtorch.wrap_tensor(self.f_actor_root_state_tensor).clone())
-            # self.dof_state_grp.create_dataset("{}th_success_data".format(self.success_v_count), data=self.v_value_obs_buf[i, 0:7].cpu().numpy())
-            # self.succ_grp.create_dataset("{}th_success_data".format(self.success_v_count), data=self.v_value_obs_buf[i, 0:7].cpu().numpy())
 
     def render_for_camera(self, sync_frame_time=False):
         # fetch results
