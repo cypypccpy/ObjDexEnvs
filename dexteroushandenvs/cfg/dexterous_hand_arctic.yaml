@@ -49,6 +49,8 @@ env:
   use_joint_space_ik: False
   use_hierarchy: False
   use_p_c_impro_loop: False
+  arctic_raw_data_path: "/home/user/arctic_yuanpei/data/arctic_data/data/raw_seqs"
+  arctic_processed_path: "/home/user/arctic_yuanpei/outputs/processed"
 
   asset:
     assetRoot: "../assets"
@@ -166,7 +168,7 @@ sim:
   physx:
     num_threads: 16
     solver_type: 1  # 0: pgs, 1: tgs
-    num_position_iterations: 4
+    num_position_iterations: 8
     num_velocity_iterations: 0
     contact_offset: 0.02
     rest_offset: 0.0

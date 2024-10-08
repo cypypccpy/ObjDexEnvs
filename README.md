@@ -40,7 +40,9 @@ pip install -e .
 ```
 
 * ARCTIC datasets
-Follow the [ARCTIC github repo](https://developer.nvidia.com/isaac-gym) to download the datasets and process them.
+
+Follow the [ARCTIC github repo](https://developer.nvidia.com/isaac-gym) to download the datasets and process them. Then modified the 
+`arctic_raw_data_path` to your `raw_seqs` folder (for example: `~/arctic/data/arctic_data/data/raw_seqs`) and `arctic_processed_path` to your `processed` folder in the `ObjDexEnvs/dexteroushandenvs/cfg/dexterous_hand_arctic.yaml` file.
 
 ## Training
 If you want to train a policy for the Box-Use-s01-01 clip from the arctic datasets, run this line in `dexteroushandenvs` folder:
@@ -52,15 +54,18 @@ python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --h
 The trained model will be saved to `runs` folder.
 
 We support that retarget human data from the ARCTIC dataset by specifying the object, the clip id, and the type of the robot hand. Here are some examples and corresponding commands (The difficulty of each clip is different, so the number of training epochs required is also different. You can modify this parameter in `dexteroushandenvs/cfg/arctic/arctic.yaml`):
-<!-- 
+
 | Human Data Clip | Command | Demo     |
 |  :----:  | :----:  | :----:  |
-| Box-Use-s01-01 |  | <img src="assets/image_folder/0v2.gif" width="250"/>    |
-| Box-Use-s01-01 |These environments again have two hands, however now they have some additional degrees of freedom that allows them to translate/rotate their centre of masses within some constrained region. | <img src="assets/image_folder/hand_catch_underarmv2.gif" align="middle" width="250"/>    |
-| Box-Use-s01-01 | This environment is made up of half ShadowHandCatchUnderarm and half ShadowHandCatchOverarm, the object needs to be thrown from the vertical hand to the palm-up hand | <img src="assets/image_folder/2v2.gif" align="middle" width="250"/>    |
-| Box-Use-s01-01 | This environment is similar to ShadowHandCatchUnderarm, the difference is that the two hands are changed from relative to side-by-side posture. | <img src="assets/image_folder/1v2.gif" align="middle" width="250"/>    |
-| Box-Use-s01-01 | These environments involve coordination between the two hands so as to throw the two objects between hands (i.e. swapping them). | <img src="assets/image_folder/two_catchv2.gif" align="middle" width="250"/>    |
-| Box-Use-s01-01 | This environment requires grasping the pot handle with two hands and lifting the pot to the designated position  | <img src="assets/image_folder/3v2.gif" align="middle" width="250"/>    | -->
+| Box-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/0_github.gif" width="250"/>    |
+| Capsule-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/1_github.gif" align="middle" width="250"/>    |
+| Expresso-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/2_github.gif" align="middle" width="250"/>    |
+| Ketchup-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/3_github.gif" align="middle" width="250"/>    |
+| Microwave-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/4_github.gif" align="middle" width="250"/>    |
+| Mixer-Use-s01-01 |`python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box`  | <img src="assets/image_folder/videos/5_github.gif" align="middle" width="250"/>    |
+| Notebook-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/6_github.gif" align="middle" width="250"/>    |
+| Waffle-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/7_github.gif" align="middle" width="250"/>    |
+| Scissors-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/8_github.gif" align="middle" width="250"/>    |
 
 ## Evaluation
 To load a trained model and only perform inference (no training), pass `--play` as an argument, and pass `--checkpoint` to specify the trained models which you want to load. Here is an example:

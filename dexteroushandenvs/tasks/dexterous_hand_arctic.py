@@ -71,6 +71,9 @@ class DexterousHandArctic(BaseTask):
         self.av_factor = self.cfg["env"].get("averFactor", 0.01)
         print("Averaging factor: ", self.av_factor)
 
+        self.arctic_raw_data_path = self.cfg["env"]["arctic_raw_data_path"]
+        self.arctic_processed_path = self.cfg["env"]["arctic_processed_path"]
+
         control_freq_inv = self.cfg["env"].get("controlFrequencyInv", 1)
         if self.reset_time > 0.0:
             self.max_episode_length = int(
@@ -593,7 +596,7 @@ class DexterousHandArctic(BaseTask):
         self.interpolate_time = 1
 
         self.dl = DataLoader(self.gym, self.sim, used_seq_list, self.functional, used_sub_seq_list, self.object_name, self.device, interpolate_time=self.interpolate_time)
-        self.seq_list, self.texture_list, self.obj_name_seq = self.dl.load_arctic_data()
+        self.seq_list, self.texture_list, self.obj_name_seq = self.dl.load_arctic_data(self.arctic_processed_path, self.arctic_raw_data_path)
 
         print("seq_num: ", len(self.seq_list))
         self.seq_list_i = [i for i in range(len(self.seq_list))]
@@ -1525,8 +1528,8 @@ class DexterousHandArctic(BaseTask):
         right_pos_err = (self.r_pos_global - self.dexterous_right_hand_pos)
         right_target_rot = self.r_rot_global
         right_rot_err = orientation_error(right_target_rot, self.dexterous_right_hand_rot)
-        right_pos_err += self.actions[:, 0:3] * 0.04
-        right_rot_err += self.actions[:, 3:6] * 0.5
+        right_pos_err += self.actions[:, 0:3] * 0.02
+        right_rot_err += self.actions[:, 3:6] * 0.1
         
         if self.use_hierarchy:
             right_pos_err = self.actions[:, 0:3] * 0.04
@@ -1545,8 +1548,8 @@ class DexterousHandArctic(BaseTask):
         left_pos_err = (self.l_pos_global - self.dexterous_left_hand_pos)
         left_target_rot = self.l_rot_global
         left_rot_err = orientation_error(left_target_rot, self.dexterous_left_hand_rot)
-        left_pos_err += self.actions[:, self.num_dexterous_hand_dofs:self.num_dexterous_hand_dofs+3] * 0.04
-        left_rot_err += self.actions[:, self.num_dexterous_hand_dofs+3:self.num_dexterous_hand_dofs+6] * 0.5
+        left_pos_err += self.actions[:, self.num_dexterous_hand_dofs:self.num_dexterous_hand_dofs+3] * 0.02
+        left_rot_err += self.actions[:, self.num_dexterous_hand_dofs+3:self.num_dexterous_hand_dofs+6] * 0.1
             
         if self.use_hierarchy:
             left_pos_err = self.actions[:, self.num_dexterous_hand_dofs:self.num_dexterous_hand_dofs+3] * 0.04
