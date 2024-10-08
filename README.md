@@ -1,6 +1,6 @@
 # Object-Centric Dexterous Manipulation from Human Motion Data
 
-<img src="assets/image_folder/teaser.gif" border=0 width=80% center>
+<div align=center><img src="assets/image_folder/teaser.gif" border=0 width=80% ></div>
 
 ## Table of Content
 - [Overview](#overview)
