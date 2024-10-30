@@ -135,10 +135,8 @@ dexteroushandenvs/runs
 assets/dataset
 
 dexteroushandenvs/demonstration
-dexteroushandenvs/high_level_planner
 dexteroushandenvs/_output_headless
 dexteroushandenvs/videos
-dexteroushandenvs/high_level_planner
 
 assets/urdf/taochen_assets
 assets/urdf/unidexgrasp_assets
