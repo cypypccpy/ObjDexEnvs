@@ -58,14 +58,14 @@ We support that retarget human data from the ARCTIC dataset by specifying the ob
 | Human Data Clip | Command | Demo     |
 |  :----:  | :----:  | :----:  |
 | Box-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/0_github.gif" width="250"/>    |
-| Capsule-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/1_github.gif" align="middle" width="250"/>    |
-| Expresso-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/2_github.gif" align="middle" width="250"/>    |
-| Ketchup-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/3_github.gif" align="middle" width="250"/>    |
-| Microwave-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/4_github.gif" align="middle" width="250"/>    |
-| Mixer-Use-s01-01 |`python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box`  | <img src="assets/image_folder/videos/5_github.gif" align="middle" width="250"/>    |
-| Notebook-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=box` | <img src="assets/image_folder/videos/6_github.gif" align="middle" width="250"/>    |
-| Waffle-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/7_github.gif" align="middle" width="250"/>    |
-| Scissors-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=box` | <img src="assets/image_folder/videos/8_github.gif" align="middle" width="250"/>    |
+| Capsule-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=capsule` | <img src="assets/image_folder/videos/1_github.gif" align="middle" width="250"/>    |
+| Expresso-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=expresso` | <img src="assets/image_folder/videos/2_github.gif" align="middle" width="250"/>    |
+| Ketchup-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=ketchup` | <img src="assets/image_folder/videos/3_github.gif" align="middle" width="250"/>    |
+| Microwave-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=microwave` | <img src="assets/image_folder/videos/4_github.gif" align="middle" width="250"/>    |
+| Mixer-Use-s01-01 |`python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=mixer`  | <img src="assets/image_folder/videos/5_github.gif" align="middle" width="250"/>    |
+| Notebook-Use-s01-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=01_01 --object=notebook` | <img src="assets/image_folder/videos/6_github.gif" align="middle" width="250"/>    |
+| Waffle-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=waffle` | <img src="assets/image_folder/videos/7_github.gif" align="middle" width="250"/>    |
+| Scissors-Use-s08-01 | `python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=2048 --hand=shadow --traj_index=08_01 --object=scissors` | <img src="assets/image_folder/videos/8_github.gif" align="middle" width="250"/>    |
 
 ## Evaluation
 To load a trained model and only perform inference (no training), pass `--play` as an argument, and pass `--checkpoint` to specify the trained models which you want to load. Here is an example:
@@ -76,16 +76,16 @@ python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=1 --hand
 
 ## Acknowledgement
 
-We thank the list of contributors from the [Bi-DexHands](https://github.com/PKU-MARL/DexterousHands).
+We thank the list of contributors from the [Bi-DexHands](GitHub - PKU-MARL/DexterousHands: This is a library that provides dual dexterous hand manipulation t) and [ARCTIC](https://github.com/zc-alexfan/arctic).
 
 ## Citations
-Please cite [Sequential Dexterity](https://sequential-dexterity.github.io) if you use this repository in your publications:
+Please cite [ObjDex](https://cypypccpy.github.io/) if you use this repository in your publications:
 ```
-@article{chen2023sequential,
-  title={Sequential Dexterity: Chaining Dexterous Policies for Long-Horizon Manipulation},
-  author={Chen, Yuanpei and Wang, Chen and Fei-Fei, Li and Liu, C Karen},
-  journal={arXiv preprint arXiv:2309.00987},
-  year={2023}
+@article{chen2024object,
+  title={Object-centric dexterous manipulation from human motion data},
+  author={Chen, Yuanpei and Wang, Chen and Yang, Yaodong and Liu, C Karen},
+  journal={arXiv preprint arXiv:2411.04005},
+  year={2024}
 }
 ```
 
