@@ -76,7 +76,7 @@ python train_rlgames.py --task DexterousHandArctic --seed 22 --num_envs=1 --hand
 
 ## Acknowledgement
 
-We thank the list of contributors from the [Bi-DexHands](GitHub - PKU-MARL/DexterousHands: This is a library that provides dual dexterous hand manipulation t) and [ARCTIC](https://github.com/zc-alexfan/arctic).
+We thank the list of contributors from the [Bi-DexHands](https://github.com/PKU-MARL/DexterousHands) and [ARCTIC](https://github.com/zc-alexfan/arctic).
 
 ## Citations
 Please cite [ObjDex](https://cypypccpy.github.io/) if you use this repository in your publications:
